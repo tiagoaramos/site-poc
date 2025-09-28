@@ -22,18 +22,18 @@ steps:
   privileged: true
   commands:
   - sleep 5 ## give docker enough time to start
-  - docker login -u deployer -p D3ployer harbor.appwebdiario.com.br
-  - docker build -t harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7} .
-  - docker push harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}
+  - docker login -u deployer -p D3ployer registry.appwebdiario.com.br
+  - docker build -t registry.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7} .
+  - docker push registry.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}
 
 
 ######################################################   Delivery
 - name: delivery
-  image: harbor.appwebdiario.com.br/appwebdiario/plugin-drone:latest
+  image: registry.appwebdiario.com.br/appwebdiario/plugin-drone:latest
   commands:
   - git clone git@github.com:appwebdiario/deploy-applications.git
   - cd deploy-applications
-  - sed -E -i.bak 's%(appwebdiario/poc-site:).*%harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}%' site-helm/templates/uzi-poc-site-deployment.yml
+  - sed -E -i.bak 's%(appwebdiario/poc-site:).*%registry.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}%' site-helm/templates/uzi-poc-site-deployment.yml
   - git add . && git commit -m "Change image site-poc to appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}" && git push
 
 
