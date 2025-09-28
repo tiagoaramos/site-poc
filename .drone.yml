@@ -23,7 +23,6 @@ steps:
   privileged: true
   commands:
   - sleep 5 ## give docker enough time to start
-  - docker login -u tiagoaramos@gmail.com -p teste123 harbor.appwebdiario.com.br
   - docker build -t harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7} .
   - docker push harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}
 
