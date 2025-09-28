@@ -22,6 +22,7 @@ steps:
   privileged: true
   commands:
   - sleep 5 ## give docker enough time to start
+  - docker login -u deployer -p D3ployer harbor-core
   - docker build  -t harbor-core/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7} .
   - docker push harbor-core/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}
 
