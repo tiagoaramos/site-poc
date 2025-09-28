@@ -15,7 +15,7 @@ trigger:
 
 ###################################################   build-push
 steps:
-- name: docker
+- name: docker-build
   image: plugins/docker
   settings:
     repo: harbor.appwebdiario.com.br
