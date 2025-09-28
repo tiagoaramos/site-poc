@@ -20,6 +20,8 @@ steps:
   - name: dockersock
     path: /var/run
   privileged: true
+  environment:
+    DOCKER_TLS_CERTDIR: ""
   commands:
   - sleep 5 ## give docker enough time to start
   - docker login -u deployer -p D3ployer harbor.appwebdiario.com.br
