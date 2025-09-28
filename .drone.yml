@@ -20,7 +20,6 @@ steps:
   volumes:
   - name: dockersock
     path: /var/run
-  privileged: true
   environment:
     APP_NAME: poc-site
 
