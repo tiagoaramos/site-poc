@@ -16,14 +16,15 @@ trigger:
 ###################################################   build-push
 steps:
 - name: build-push
-  image: harbor.appwebdiario.com.br/appwebdiario/docker-build:7.0
-  privileged: true
+  image: harbor.appwebdiario.com.br/appwebdiario/docker-build:9.0
   volumes:
   - name: dockersock
     path: /var/run
-  environment:
-    APP_NAME: poc-site
-    TAG_NAME: harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}
+  privileged: true
+  commands:
+  - sleep 5 ## give docker enough time to start
+  - docker build -t harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7} .
+  - docker push harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}
 
 
 ######################################################   Delivery
