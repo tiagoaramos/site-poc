@@ -12,7 +12,6 @@ trigger:
       exclude:
       - pull_request
 
-
 ###################################################   build-push
 steps:
 - name: build-push
