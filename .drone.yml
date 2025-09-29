@@ -12,8 +12,6 @@ trigger:
       exclude:
       - pull_request
 
-
-###################################################   build-push
 steps:
 - name: build-push
   image: harbor.appwebdiario.com.br/appwebdiario/docker-build:latest
@@ -26,14 +24,12 @@ steps:
   - docker build -t harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7} .
   - docker push harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}
 
-######################################################   Delivery
 - name: delivery
   image: harbor.appwebdiario.com.br/appwebdiario/pipeline-base-module:latest
   environment:
     GITOPS_IMAGE_TAG: ${DRONE_COMMIT_SHA:0:7}
     GITOPS_YAML_FILE: application.yml
 
-########################################################   Services
 services:
 - name: docker
   image: docker:dind
