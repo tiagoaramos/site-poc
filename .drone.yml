@@ -29,7 +29,7 @@ steps:
 
 ######################################################   Delivery
 - name: delivery
-  image: harbor.appwebdiario.com.br/appwebdiario/pipeline-base-module:1.2
+  image: harbor.appwebdiario.com.br/appwebdiario/pipeline-base-module:1.3
   environment:
     GITOPS_IMAGE_TAG: ${DRONE_COMMIT_SHA:0:7}
     GITOPS_YAML_FILE: application.yml
