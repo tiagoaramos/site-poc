@@ -22,7 +22,7 @@ steps:
   privileged: true
   commands:
   - sleep 5 ## give docker enough time to start
-  - docker login -u deployer -p D3ployer harbor.appwebdiario.com.br
+  - echo ${docker_password} | docker login -u ${docker_username} harbor.appwebdiario.com.br --password-stdin
   - docker build -t harbor.appwebdiario.com.br/appwebdiario/site:${DRONE_COMMIT_SHA:0:7} .
   - docker push harbor.appwebdiario.com.br/appwebdiario/site:${DRONE_COMMIT_SHA:0:7}
 
