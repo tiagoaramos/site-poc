@@ -1,15 +1,33 @@
 kind: pipeline
-name: default
+type: docker
+name: MINHA PIPE
+
+######################################################   trigger
+trigger:
+  branch:
+  - main
+  when:
+    event:
+      exclude:
+      - pull_request
 
 steps:
-- name: test
-  image: docker:dind
+- name: build-push
+  image: harbor.appwebdiario.com.br/appwebdiario/docker-build:latest
+  privileged: true
+  pull: always
   volumes:
   - name: dockersock
     path: /var/run
-  commands:
-  - sleep 5 # give docker enough time to start
-  - docker ps -a
+  environment:
+    DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
+    APP_NAME: appwebdiario/poc-site
+
+- name: delivery
+  image: harbor.appwebdiario.com.br/appwebdiario/pipeline-base-module:latest
+  environment:
+    GITOPS_IMAGE_TAG: ${DRONE_COMMIT_SHA:0:7}
+    GITOPS_YAML_FILE: application.yml
 
 services:
 - name: docker
