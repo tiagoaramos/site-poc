@@ -6,12 +6,6 @@ replicaCount: 2
 # Variáveis de ambiente da aplicação
 env:
   SPRING_PROFILES_ACTIVE: production # Production ou Homolog
-  SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/site
-  SPRING_DATASOURCE_USERNAME: myapp
-  SPRING_DATASOURCE_PASSWORD: myapp123
-  SPRING_REDIS_HOST: redis
-  SPRING_REDIS_PORT: 6379
-  SPRING_REDIS_PASSWORD: redis123
   LOG_LEVEL: INFO
 
 
