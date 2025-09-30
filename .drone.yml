@@ -20,9 +20,14 @@ steps:
   - name: dockersock
     path: /var/run
   privileged: true
+  environment:
+    USERNAME:
+      from_secret: docker_username
+    PASSWORD:
+      from_secret: docker_password
   commands:
   - sleep 5 ## give docker enough time to start
-  - echo ${docker_password} | docker login -u ${docker_username} harbor.appwebdiario.com.br --password-stdin
+  - echo ${PASSWORD} | docker login -u ${USERNAME} harbor.appwebdiario.com.br --password-stdin
   - docker build -t harbor.appwebdiario.com.br/appwebdiario/site:${DRONE_COMMIT_SHA:0:7} .
   - docker push harbor.appwebdiario.com.br/appwebdiario/site:${DRONE_COMMIT_SHA:0:7}
 
