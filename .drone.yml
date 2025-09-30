@@ -13,6 +13,16 @@ trigger:
       - pull_request
 
 steps:
+- name: docker-login
+  image: docker:dind
+  secrets: [docker-registry]
+  volumes:
+  - name: dockersock
+    path: /var/run
+  privileged: true
+  commands:
+  - docker login harbor.appwebdiario.com.br -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+
 - name: build-push
   image: harbor.appwebdiario.com.br/appwebdiario/docker-build:latest
   secrets: [docker-registry]
