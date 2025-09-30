@@ -45,10 +45,6 @@ services:
     path: /var/run
   environment:
     DOCKER_TLS_CERTDIR: ""
-  command:
-    [
-      '--insecure-registry=harbor.appwebdiario.com.br'
-    ]
 volumes:
 - name: dockersock
   temp: {}
