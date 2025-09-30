@@ -22,9 +22,7 @@ steps:
     path: /var/run
   environment:
     DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
-    APP_NAME: appwebdiario/poc-site
-  depends_on:
-  - docker
+    APP_NAME: poc-site
 
 - name: delivery
   image: harbor.appwebdiario.com.br/appwebdiario/pipeline-base-module:latest
