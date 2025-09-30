@@ -23,6 +23,7 @@ steps:
   environment:
     DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
     APP_NAME: poc-site
+  privileged: true
   command:
     [
       '--insecure-registry=harbor.appwebdiario.com.br'
