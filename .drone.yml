@@ -16,6 +16,7 @@ steps:
 - name: build-push
   image: harbor.appwebdiario.com.br/appwebdiario/docker-build:latest
   privileged: true
+  pull: always
   volumes:
   - name: dockersock
     path: /var/run
