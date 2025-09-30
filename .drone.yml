@@ -2,6 +2,7 @@ kind: pipeline
 type: docker
 name: MINHA PIPE
 
+
 ######################################################   trigger
 trigger:
   branch:
@@ -22,6 +23,8 @@ steps:
   environment:
     DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
     APP_NAME: appwebdiario/poc-site
+  depends_on:
+  - docker
 
 - name: delivery
   image: harbor.appwebdiario.com.br/appwebdiario/pipeline-base-module:latest
@@ -36,7 +39,10 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
-
+  command:
+    [
+      '--insecure-registry=harbor.appwebdiario.com.br'
+    ]
 volumes:
 - name: dockersock
   temp: {}
