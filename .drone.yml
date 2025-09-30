@@ -20,7 +20,6 @@ steps:
   volumes:
   - name: dockersock
     path: /var/run
-  privileged: true
   environment:
     DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
     APP_NAME: poc-site
