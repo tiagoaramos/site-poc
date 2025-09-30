@@ -1,38 +1,15 @@
 kind: pipeline
-type: docker
-name: MINHA PIPE
-
-
-######################################################   trigger
-trigger:
-  branch:
-  - main
-  when:
-    event:
-      exclude:
-      - pull_request
+name: default
 
 steps:
-- name: build-push
-  image: harbor.appwebdiario.com.br/appwebdiario/docker-build:latest
-  privileged: true
-  pull: always
+- name: test
+  image: docker:dind
   volumes:
   - name: dockersock
     path: /var/run
-  environment:
-    DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
-    APP_NAME: appwebdiario/poc-site
-  depends_on:
-  - docker
-
-- name: delivery
-  image: harbor.appwebdiario.com.br/appwebdiario/pipeline-base-module:latest
-  environment:
-    GITOPS_IMAGE_TAG: ${DRONE_COMMIT_SHA:0:7}
-    GITOPS_YAML_FILE: application.yml
-  depends_on:
-  - build-push
+  commands:
+  - sleep 5 # give docker enough time to start
+  - docker ps -a
 
 services:
 - name: docker
@@ -41,10 +18,7 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
-  command:
-    [
-      '--insecure-registry=harbor.appwebdiario.com.br'
-    ]
+
 volumes:
 - name: dockersock
   temp: {}
