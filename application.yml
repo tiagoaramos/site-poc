@@ -1,5 +1,5 @@
 name: site
-namespace: site-space
+namespace: site
 containerPort: 80
 replicaCount: 2
 
