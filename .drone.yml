@@ -17,9 +17,6 @@ steps:
   image: harbor.appwebdiario.com.br/appwebdiario/docker-build:latest
   secrets:
   - name: docker-registry
-  volumes:
-  - name: dockersock
-    path: /var/run
   privileged: true
   environment:
     DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
