@@ -15,7 +15,7 @@ trigger:
 ###################################################   build-push
 steps:
 - name: build-push
-  image: harbor.appwebdiario.com.br/appwebdiario/docker-build:1.3
+  image: harbor.appwebdiario.com.br/appwebdiario/docker-build:latest
   pull: always
   volumes:
   - name: dockersock
