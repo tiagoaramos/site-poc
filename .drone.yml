@@ -15,7 +15,7 @@ trigger:
 ###################################################   build-push
 steps:
 - name: build-push
-  image: harbor.appwebdiario.com.br/appwebdiario/docker-build:latest
+  image: harbor.appwebdiario.com.br/appwebdiario/docker-build:1.3
   pull: always
   volumes:
   - name: dockersock
@@ -23,6 +23,10 @@ steps:
   environment:
     DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
     APP_NAME: poc-site
+  command:
+    [
+      '--insecure-registry=harbor.appwebdiario.com.br'
+    ]
 
 ######################################################   Delivery
 - name: delivery
@@ -39,6 +43,10 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
+  command:
+    [
+      '--insecure-registry=harbor.appwebdiario.com.br'
+    ]
 volumes:
 - name: dockersock
   temp: {}
