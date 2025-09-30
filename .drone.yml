@@ -23,7 +23,6 @@ steps:
   environment:
     DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
     APP_NAME: poc-site
-    DOCKER_TLS_CERTDIR: "/etc/ssl/certs/"
 
 ######################################################   Delivery
 - name: delivery
@@ -40,10 +39,6 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
-  command:
-    [
-      '--insecure-registry=harbor.appwebdiario.com.br'
-    ]
 volumes:
 - name: dockersock
   temp: {}
