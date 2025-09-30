@@ -21,7 +21,7 @@ steps:
     path: /var/run
   privileged: true
   commands:
-  - docker login harbor.appwebdiario.com.br -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+  - echo ${DOCKER_PASSWORD} | docker login harbor.appwebdiario.com.br -u ${DOCKER_USERNAME} -p-stdin
 
 - name: build-push
   image: harbor.appwebdiario.com.br/appwebdiario/docker-build:latest
