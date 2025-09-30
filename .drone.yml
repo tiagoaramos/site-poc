@@ -23,12 +23,16 @@ steps:
   environment:
     DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
     APP_NAME: appwebdiario/poc-site
+  depends_on:
+  - docker
 
 - name: delivery
   image: harbor.appwebdiario.com.br/appwebdiario/pipeline-base-module:latest
   environment:
     GITOPS_IMAGE_TAG: ${DRONE_COMMIT_SHA:0:7}
     GITOPS_YAML_FILE: application.yml
+  depends_on:
+  - build-push
 
 services:
 - name: docker
