@@ -15,6 +15,8 @@ trigger:
 steps:
 - name: build-push
   image: harbor.appwebdiario.com.br/appwebdiario/docker-build:latest
+  secrets:
+  - name: docker-registry
   volumes:
   - name: dockersock
     path: /var/run
