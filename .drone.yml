@@ -23,12 +23,12 @@ steps:
   commands:
   - sleep 5 ## give docker enough time to start
   - docker login -u deployer -p D3ployer harbor.appwebdiario.com.br
-  - docker build -t harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7} .
-  - docker push harbor.appwebdiario.com.br/appwebdiario/poc-site:${DRONE_COMMIT_SHA:0:7}
+  - docker build -t harbor.appwebdiario.com.br/appwebdiario/site:${DRONE_COMMIT_SHA:0:7} .
+  - docker push harbor.appwebdiario.com.br/appwebdiario/site:${DRONE_COMMIT_SHA:0:7}
 
 ######################################################   Delivery
 - name: delivery
-  image: harbor.appwebdiario.com.br/appwebdiario/pipeline-base-module:1.0
+  image: harbor.appwebdiario.com.br/appwebdiario/pipeline-base-module:latest
   pull: always
   environment:
     GITOPS_IMAGE_TAG: ${DRONE_COMMIT_SHA:0:7}
